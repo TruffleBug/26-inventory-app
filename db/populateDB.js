@@ -11,10 +11,10 @@ CREATE TABLE IF NOT EXISTS class (
 
 INSERT INTO class (name) VALUES 
 	('fish'), 
-	('amphibian'), 
-	('reptile'), 
-	('bird'), 
-	('mammal');
+	('amphibians'), 
+	('reptiles'), 
+	('birds'), 
+	('mammals');
 
 CREATE TABLE IF NOT EXISTS color (
 	id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -71,7 +71,7 @@ INSERT INTO animals (name, class, color, size, quantity) VALUES
 async function main() {
 	console.log('seeding...');
 	const client = new Client({
-		connectionString: `postgresql://${process.env.user}:${process.env.password}@localhost:5432/${db_name}`,
+		connectionString: `postgresql://${process.env.user}:${process.env.password}@localhost:5432/${process.env.db_name}`,
 	});
 	await client.connect();
 	await client.query(SQL);

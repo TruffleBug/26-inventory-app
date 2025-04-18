@@ -1,0 +1,11 @@
+<nav class="navbar">
+	<ul>
+		<% for (let i = 0; i < links.length; i++) { %>
+            <li>
+                <a href="<%= links[i].name.href %>">
+                    <span> <%= links[i].name %> </span>
+                </a>
+            </li>
+		<% } %>
+	</ul>
+</nav>
