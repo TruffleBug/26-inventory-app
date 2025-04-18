@@ -21,14 +21,8 @@ async function getCategories() {
 //     return rows;
 // }
 
-async function getSubcat() {
-    const { rows } = await pool.query(`
-        SELECT name, 'class' AS tablename FROM class
-        UNION
-        SELECT name, 'color' AS tablename FROM color
-        UNION
-        SELECT name, 'size' AS tablename FROM size
-        ORDER BY name ASC`);
+async function getSubcat(category) {
+    const { rows } = await pool.query(`SELECT name FROM ${category} ORDER BY name ASC;`);
     return rows;
 }
 
@@ -40,7 +34,7 @@ async function getAnimalsInSubcat(category, subcat) {
     return rows;
 }
 
-async function getAllAnimals(category) {
+async function getAllAnimals() {
     const { rows } = await pool.query(`SELECT name, quantity FROM animals ORDER BY name ASC;`);
     return rows;
 }

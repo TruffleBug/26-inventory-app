@@ -8,19 +8,16 @@
 
 		<div class="main">
 			<h1><%= title %></h1>
-			<h2><%= locals.subtitle %></h2>
 
 			<ul>
-				<% for (let i = 0; i < list.length; i++) { %>
+				<% for (let i = 0; i < subcats.length; i++) { %>
 					<li class="mainList">
-						<%= list[i].name %> (qty: <%= list[i].quantity %>)
+						<a href="/list/<%= category %>/<%= subcats[i].name %>">
+							<%= subcats[i].name %> 
+						</a>
 					</li>
 				<% } %>
 			</ul>
-
-			<a href="/">
-				Back to home
-			</a>
 		</div>
 	</body>
 </html>

@@ -8,15 +8,14 @@ async function createCategoryGet(req, res, next) {
     next();
 };
 
-async function createSubcatGet(req, res, next) {
+async function createSubcatGet(req, res) {
     const subcats = await db.getSubcat(req.params.category);
-    res.locals.subcats = subcats;
-    next();
+    res.render('subcat', { title: `Select a ${req.params.category}`, category: req.params.category, subcats: subcats })
 };
 
 async function createAnimalsInSubcatGet(req, res) {
     const subcatAnimals = await db.getAnimalsInSubcat(req.params.category, req.params.subcat);
-    res.render('list', { title: `View by ${req.params.category}`, subtitle: req.params.subcat, list: subcatAnimals})
+    res.render('list', { title: `View by ${req.params.category}`, subtitle: req.params.subcat, category: req.params.category, list: subcatAnimals })
 };
 
 async function createAllAnimalGet(req, res) {
@@ -27,7 +26,6 @@ async function createAllAnimalGet(req, res) {
 module.exports = {
     createCategoryGet,
     createSubcatGet, 
-    // showSubcat,
     createAnimalsInSubcatGet,
     createAllAnimalGet
 }

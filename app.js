@@ -21,7 +21,8 @@ const indexRouter = require('./routes/indexRouter');
 const listRouter = require('./routes/listRouter');
 
 const listOfCategories = listController.createCategoryGet;
-const listOfSubCat = listController.createSubcatGet;
+// const listOfSubCat = listController.createSubcatGet;
 
-app.use('/', listOfCategories, listOfSubCat, indexRouter);
+// app.use('/', listOfCategories, listOfSubCat, indexRouter);
+app.use('/', listOfCategories, indexRouter);
 app.use('/list', listRouter);
