@@ -24,6 +24,10 @@ DB
 - pool.js
 - populateDB.js
 - queries.js
+    - getCategories (class, color, size)
+    - getSubCat (fish, birds, brown, tiny, etc.)
+    - getAnimals
+    - getAllAnimals?
 
 ROUTES
 - index ('/')
@@ -48,7 +52,7 @@ VIEWS
 - navbar
     - contains list of categories
 - subnav
-    - contains list of types within categories
+    - contains list of subcategories within categories
 
 CONTROLLERS
 - listController (references ../db/queries.js)

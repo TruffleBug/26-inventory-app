@@ -11,10 +11,10 @@ CREATE TABLE IF NOT EXISTS class (
 
 INSERT INTO class (name) VALUES 
 	('fish'), 
-	('amphibians'), 
-	('reptiles'), 
-	('birds'), 
-	('mammals');
+	('amphibian'), 
+	('reptile'), 
+	('bird'), 
+	('mammal');
 
 CREATE TABLE IF NOT EXISTS color (
 	id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,

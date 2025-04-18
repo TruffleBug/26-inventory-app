@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="/styles.css" />
+		<title><%= title %></title>
+	</head>
+	<body>
+		<%- include('navbar', { categories: categories }) %>
+
+		<div class="main">
+			<h1><%= title %></h1>
+			<h2><%= locals.subtitle %></h2>
+
+			<ul>
+				<% for (let i = 0; i < list.length; i++) { %>
+				    <li class="animalList">
+                        <%= list[i].name %> (Quantity: <%= list[i].quantity %>)
+                    </li>
+				<% } %>
+			</ul>
+		</div>
+	</body>
+</html>

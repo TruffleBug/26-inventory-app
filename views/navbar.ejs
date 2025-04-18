@@ -1,11 +1,30 @@
 <nav class="navbar">
+    <h2>Animal Farm</h2>
 	<ul>
-		<% for (let i = 0; i < links.length; i++) { %>
-            <li>
-                <a href="<%= links[i].name.href %>">
-                    <span> <%= links[i].name %> </span>
+        <% for (let i = 0; i < categories.length; i++) { %>
+            <% const filteredSubcats = subcats.filter(e => e.tablename == categories[i].table_name) %>
+
+            <li class="categoryList">
+                <a href="/list/<%= categories[i].table_name %>">
+                    <%= categories[i].table_name %> 
                 </a>
+
+                <ul class="subcatList">
+                    <% for (let j = 0; j < filteredSubcats.length; j++) { %>
+                        <li>
+                            <a href="/list/<%= categories[i].table_name %>/<%= filteredSubcats[j].name %>">
+                                <%= filteredSubcats[j].name %> 
+                            </a>
+                        </li>
+                    <% } %>
+                </ul>
             </li>
 		<% } %>
+        
+        <li class="categoryList">
+            <a href="/list/all">
+                <span> view all </span>
+            </a>
+        </li>
 	</ul>
 </nav>

@@ -29,9 +29,19 @@ a {
 }
 
 .main {
-    margin-left: calc(var(--navbarWidth) + 35px);
+    margin-left: calc(var(--navbarWidth) + 44px);
+    padding-top: 11px;
+}
+
+h1, h2 {
+    margin-bottom: 16px;
 }
 
 li {
     list-style: none;
+    margin-bottom: 4px;
+}
+
+.subcatList {
+    margin-left: 20px;
 }
