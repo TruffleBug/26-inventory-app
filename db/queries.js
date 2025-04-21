@@ -49,6 +49,20 @@ async function updateAnimal(animal, newInfo) {
     return;
 };
 
+async function postNewAnimal(info) {
+    let nameFormatted = info.enterName.charAt(0).toUpperCase() + info.enterName.slice(1);
+    await pool.query(`
+        INSERT INTO animals (name, class, color, size, quantity)
+        VALUES (
+            '${nameFormatted}', 
+            (SELECT id FROM class WHERE name='${info.enterClass}'),
+            (SELECT id FROM color WHERE name='${info.enterColor}'),
+            (SELECT id FROM size WHERE name='${info.enterSize}'),
+            ${info.enterQuantity}
+        );`)
+    return;
+};
+
 module.exports = {
     getCategories,
     getSubcat, 
@@ -56,5 +70,6 @@ module.exports = {
     getAllAnimals,
     deleteAnimal,
     getAnimalInfo,
-    updateAnimal
+    updateAnimal,
+    postNewAnimal
 }

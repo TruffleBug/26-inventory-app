@@ -21,6 +21,7 @@ const indexRouter = require('./routes/indexRouter');
 const listRouter = require('./routes/listRouter');
 const deleteRouter = require('./routes/deleteRouter');
 const updateRouter = require('./routes/updateRouter');
+const newRouter = require('./routes/newRouter');
 
 const listOfCategories = listController.createCategoryGet;
 
@@ -28,3 +29,4 @@ app.use('/', listOfCategories, indexRouter);
 app.use('/list', listRouter);
 app.use('/delete', deleteRouter);
 app.use('/update', updateRouter);
+app.use('/new', newRouter);

@@ -43,6 +43,19 @@ async function createUpdateAnimalPost(req, res) {
     // res.render('confirmation', { title: 'Confirmation', item: req.params.animal, action: 'updated' });
 };
 
+async function createNewAnimalGet(req, res) {
+    const allClasses = await db.getSubcat('class');
+    const allColors = await db.getSubcat('color');
+    const allSizes = await db.getSubcat('size');
+    res.render('new', { title: 'New Animal', allClasses: allClasses, allColors: allColors, allSizes: allSizes })
+};
+
+async function createNewAnimalPost(req, res) {
+    await db.postNewAnimal(req.body);
+    let nameFormatted = req.body.enterName.charAt(0).toUpperCase() + req.body.enterName.slice(1);
+    res.render('confirmation', { title: 'Confirmation', item: nameFormatted, action: 'added' });
+};
+
 module.exports = {
     createCategoryGet,
     createSubcatGet, 
@@ -50,5 +63,7 @@ module.exports = {
     createAllAnimalGet,
     createDeleteAnimalPost,
     createUpdateAnimalGet,
-    createUpdateAnimalPost
+    createUpdateAnimalPost,
+    createNewAnimalGet,
+    createNewAnimalPost
 }
