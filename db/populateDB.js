@@ -27,7 +27,13 @@ INSERT INTO color (name) VALUES
     ('brown'),
     ('white'),
     ('black'),
-    ('yellow');
+    ('yellow'),
+	('red'),
+	('blue'),
+	('orange'),
+	('purple'),
+	('tan'),
+	('multi');
 
 CREATE TABLE IF NOT EXISTS size (
 	id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -53,8 +59,8 @@ CREATE TABLE IF NOT EXISTS animals (
 INSERT INTO animals (name, class, color, size, quantity) VALUES 
 	('Tree Frog', 2, 1, 1, 362),
 	('Cane Toad', 2, 3, 1, 1),
-	('Camel', 5, 3, 5, 32),
-	('Giraffe', 5, 3, 5, 61),
+	('Camel', 5, 11, 5, 32),
+	('Giraffe', 5, 6, 5, 61),
 	('Green Snake', 3, 1, 2, 24),
 	('King Cobra', 3, 3, 2, 20),
 	('Snowy Owl', 4, 4, 2, 3),

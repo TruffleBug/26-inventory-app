@@ -1,0 +1,58 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="/styles.css">
+		<title><%= title %></title>
+	</head>
+	<body>
+		<%- include('navbar', { categories: categories }) %>
+		
+		<div class="main">
+			<h1><%= title %></h1>
+
+			<form action="/update/<%= locals.item %>" method="POST">
+				<label for="newName">Name: </label>
+				<input type="text" name="newName" value="<%= item.name %>" required /> </br>
+
+				<label for="newClass">Class: </label>
+				<select name="newClass" id="newClass">
+					<% allClasses.forEach(e => { %>
+						<% if(e.name == item.class) { %>
+							<option value="<%= e.name %>" selected><%= e.name %></option>
+						<% } else { %>
+							<option value="<%= e.name %>"><%= e.name %></option>
+						<% } %>
+					<% }) %>
+				</select> </br>
+
+				<label for="newColor">Color: </label>
+				<select name="newColor" id="newColor">
+					<% allColors.forEach(e => { %>
+						<% if(e.name == item.color) { %>
+							<option value="<%= e.name %>" selected><%= e.name %></option>
+						<% } else { %>
+							<option value="<%= e.name %>"><%= e.name %></option>
+						<% } %>
+					<% }) %>
+				</select> </br>
+
+				<label for="newSize">Size: </label>
+				<select name="newSize" id="newSize">
+					<% allSizes.forEach(e => { %>
+						<% if(e.name == item.size) { %>
+							<option value="<%= e.name %>" selected><%= e.name %></option>
+						<% } else { %>
+							<option value="<%= e.name %>"><%= e.name %></option>
+						<% } %>
+					<% }) %>
+				</select> </br>
+
+				<label for="newQuantity">Quantity: </label>
+				<input type="number" name="newQuantity" value="<%= item.quantity %>" required /> </br>
+
+				<button type="submit">Update</button>
+			</form>
+
+			<a href="/">Cancel</a>
+		</div>
+	</body>
+</html>

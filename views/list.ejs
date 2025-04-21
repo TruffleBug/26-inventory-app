@@ -8,19 +8,51 @@
 
 		<div class="main">
 			<h1><%= title %></h1>
-			<h2><%= locals.subtitle %></h2>
+			<h2><%= locals.subcat %></h2>
 
-			<ul>
-				<% for (let i = 0; i < list.length; i++) { %>
-					<li class="mainList">
-						<%= list[i].name %> (qty: <%= list[i].quantity %>)
-					</li>
+			<% if (locals.subcatList) { %>
+				<ul>
+					<% for (let i = 0; i < subcatList.length; i++) { %>
+						<li class="mainList">
+							<a href="/list/<%= category %>/<%= subcatList[i].name %>">
+								<%= subcatList[i].name %> 
+							</a>
+						</li>
+					<% } %>
+				</ul>
+			<% } else { %>
+				<% if(list.length == 0) { %>
+					No matches.
+				<% } else { %>
+					<ul>
+						<% for (let i = 0; i < list.length; i++) { %>
+							<li class="mainList">
+								<%= list[i].name %> (qty: <%= list[i].quantity %>)
+								
+								<a href="../../update/<%= list[i].name %>">Update</a>
+
+								<form action="../../delete/<%= list[i].name %>" method="POST" style="display: inline">
+									<button type="submit" onclick="return confirm('Are you sure you want to delete all <%= list[i].name %>?');">
+										Delete
+									</button>
+								</form>
+							</li>
+						<% } %>
+					</ul>
 				<% } %>
-			</ul>
+			<% } %>
 
-			<a href="/">
-				Back to home
-			</a>
+			<% if(locals.subcat) { %>
+				</br>
+				<a href="/list/<%= locals.category %>">
+					Back to <%= locals.category %>
+				</a>
+			<% } else { %>
+				</br>
+				<a href="/">
+					Back to home
+				</a>
+			<% } %>
 		</div>
 	</body>
 </html>

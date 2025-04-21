@@ -19,10 +19,12 @@ app.listen(PORT, () => {
 const listController = require('./controllers/listController');
 const indexRouter = require('./routes/indexRouter');
 const listRouter = require('./routes/listRouter');
+const deleteRouter = require('./routes/deleteRouter');
+const updateRouter = require('./routes/updateRouter');
 
 const listOfCategories = listController.createCategoryGet;
-// const listOfSubCat = listController.createSubcatGet;
 
-// app.use('/', listOfCategories, listOfSubCat, indexRouter);
 app.use('/', listOfCategories, indexRouter);
 app.use('/list', listRouter);
+app.use('/delete', deleteRouter);
+app.use('/update', updateRouter);
