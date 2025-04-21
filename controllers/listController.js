@@ -38,7 +38,7 @@ async function createUpdateAnimalGet(req, res) {
 
 async function createUpdateAnimalPost(req, res) {
     const { newName, newClass, newColor, newSize, newQuantity } = req.body;
-    console.log('ANIMAL: ', req.params.animal, ', REQUEST BODY: ', req.body)
+    console.log('ANIMAL: ', req.params, ', REQUEST BODY: ', req.body)
     // db.updateAnimal(req.params.animal[0], req.body);
     // res.render('confirmation', { title: 'Confirmation', item: req.params.animal, action: 'updated' });
 };

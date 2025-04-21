@@ -35,7 +35,7 @@ async function deleteAnimal(animal) {
 
 async function getAnimalInfo(animal) {
     const { rows } = await pool.query(`
-        SELECT animals.name, class.name AS class, color.name AS color, size.name AS size, animals.quantity FROM animals 
+        SELECT animals.id, animals.name, class.name AS class, color.name AS color, size.name AS size, animals.quantity FROM animals 
         JOIN class ON animals.class = class.id
         JOIN color ON animals.color = color.id
         JOIN size ON animals.size = size.id
