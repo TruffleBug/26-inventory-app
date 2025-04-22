@@ -30,3 +30,8 @@ app.use('/list', listRouter);
 app.use('/delete', deleteRouter);
 app.use('/update', updateRouter);
 app.use('/new', newRouter);
+
+app.use((err, req, res, next) => {
+	console.error(err);
+	res.status(err.statusCode || 500).send(err.message);
+});
