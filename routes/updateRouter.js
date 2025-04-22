@@ -3,7 +3,8 @@ const updateRouter = Router();
 const listController = require('../controllers/listController');
 
 updateRouter
-    .get('/:animal', listController.createUpdateAnimalGet)
-    .post('/:animal', listController.createUpdateAnimalPost);
+    .route('/:animalId')
+    .get(listController.createUpdateAnimalGet)
+    .post(listController.createUpdateAnimalPost);
 
 module.exports = updateRouter;

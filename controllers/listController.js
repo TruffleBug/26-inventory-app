@@ -24,23 +24,24 @@ async function createAllAnimalGet(req, res) {
 };
 
 async function createDeleteAnimalPost(req, res) {
-	await db.deleteAnimal(req.params.animal);
-    res.render('confirmation', { title: 'Confirmation', item: req.params.animal, action: 'deleted' });
+    const animal = await db.getAnimalById(req.params.animalId);
+	await db.deleteAnimal(req.params.animalId);
+    res.render('confirmation', { title: 'Confirmation', item: animal[0].name, action: 'deleted' });
 };
 
 async function createUpdateAnimalGet(req, res) {
-    const animalInfo = await db.getAnimalInfo(req.params.animal);
+    const animalInfo = await db.getAnimalById(req.params.animalId);
     const allClasses = await db.getSubcat('class');
     const allColors = await db.getSubcat('color');
     const allSizes = await db.getSubcat('size');
-    res.render('revisionForm', { title: `Update ${req.params.animal}`, item: animalInfo[0], allClasses: allClasses, allColors: allColors, allSizes: allSizes });
+    res.render('revisionForm', { title: `Update ${animalInfo[0].name}`, item: animalInfo[0], allClasses: allClasses, allColors: allColors, allSizes: allSizes });
 };
 
 async function createUpdateAnimalPost(req, res) {
     const { newName, newClass, newColor, newSize, newQuantity } = req.body;
-    console.log('ANIMAL: ', req.params, ', REQUEST BODY: ', req.body)
-    // db.updateAnimal(req.params.animal[0], req.body);
-    // res.render('confirmation', { title: 'Confirmation', item: req.params.animal, action: 'updated' });
+    // const animal = await db.getAnimalById(req.params.animalId);
+    await db.updateAnimal(req.params.animalId, newName, newClass, newColor, newSize, newQuantity);
+    res.render('confirmation', { title: 'Confirmation', item: newName, action: 'updated' });
 };
 
 async function createNewAnimalGet(req, res) {

@@ -17,35 +17,42 @@ async function getSubcat(category) {
 
 async function getAnimalsInSubcat(category, subcat) {
     const { rows } = await pool.query(`
-        SELECT name, quantity FROM animals
+        SELECT id, name, quantity FROM animals
         WHERE ${category} = 
-        (SELECT id FROM ${category} WHERE name LIKE '${subcat}')`);
+        (SELECT id FROM ${category} WHERE name LIKE '${subcat}') ORDER BY name ASC;`);
     return rows;
 };
 
-async function getAllAnimals() {
-    const { rows } = await pool.query(`SELECT name, quantity FROM animals ORDER BY name ASC;`);
-    return rows;
-};
-
-async function deleteAnimal(animal) {
-    await pool.query(`DELETE FROM animals WHERE name='${animal}';`);
-    return;
-};
-
-async function getAnimalInfo(animal) {
+async function getAnimalById(animalId) {
     const { rows } = await pool.query(`
         SELECT animals.id, animals.name, class.name AS class, color.name AS color, size.name AS size, animals.quantity FROM animals 
         JOIN class ON animals.class = class.id
         JOIN color ON animals.color = color.id
         JOIN size ON animals.size = size.id
-        WHERE animals.name='${animal}';`);
+        WHERE animals.id='${animalId}';`);
     return rows;
 };
 
-async function updateAnimal(animal, newInfo) {
-    console.log(animal, newInfo)
-    // await pool.query(``);
+async function getAllAnimals() {
+    const { rows } = await pool.query(`SELECT id, name, quantity FROM animals ORDER BY name ASC;`);
+    return rows;
+};
+
+async function deleteAnimal(animalId) {
+    await pool.query(`DELETE FROM animals WHERE id=${animalId};`);
+    return;
+};
+
+async function updateAnimal(animalId, newName, newClass, newColor, newSize, newQuantity) {
+    console.log('animalId: ', animalId)
+    await pool.query(`
+        UPDATE animals
+        SET name = '${newName}',
+        class = (SELECT id FROM class WHERE name='${newClass}'), 
+        color = (SELECT id FROM color WHERE name='${newColor}'),  
+        size = (SELECT id FROM size WHERE name='${newSize}'), 
+        quantity = ${newQuantity}
+        WHERE id = ${animalId};`);
     return;
 };
 
@@ -67,9 +74,9 @@ module.exports = {
     getCategories,
     getSubcat, 
     getAnimalsInSubcat,
+    getAnimalById,
     getAllAnimals,
     deleteAnimal,
-    getAnimalInfo,
     updateAnimal,
     postNewAnimal
 }
