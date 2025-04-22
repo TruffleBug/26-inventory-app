@@ -1,5 +1,6 @@
 const { body, validationResult, matchedData } = require('express-validator');
 const db = require('../db/queries');
+const asyncHandler = require('express-async-handler');
 
 
 async function createCategoryGet(req, res, next) {
@@ -8,10 +9,14 @@ async function createCategoryGet(req, res, next) {
     next();
 };
 
-async function createSubcatGet(req, res) {
+const createSubcatGet = asyncHandler(async (req, res) => {
     const subcats = await db.getSubcat(req.params.category);
+    if(!subcats) {
+        res.status(404).send("Subcategory not found");
+        return;
+    };
     res.render('list', { title: `Select a ${req.params.category}`, category: req.params.category, subcatList: subcats })
-};
+});
 
 async function createAnimalsInSubcatGet(req, res) {
     const subcatAnimals = await db.getAnimalsInSubcat(req.params.category, req.params.subcat);
